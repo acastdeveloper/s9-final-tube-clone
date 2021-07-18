@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const GlobalContext = React.createContext();
 
 const GlobalSettings = (props) => {
-  const [term, setTerm] = useState("bach");
+  const [term, setTerm] = useState("");
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
 

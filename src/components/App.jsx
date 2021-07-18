@@ -7,7 +7,8 @@ import youtube from "../api/youtube";
 import { GlobalContext } from "./context/GlobalSettings";
 
 const App = () => {
-  const { term, videos, setVideos } = useContext(GlobalContext);
+  const { term, videos, setVideos, videosO, setVideosO } =
+    useContext(GlobalContext);
 
   const handleSubmit = async (searchTerm) => {
     const response = await youtube
@@ -23,51 +24,60 @@ const App = () => {
         setVideos(
           response.data.items.map((e, i) => {
             return [
-              " / / / / /  -> INDEX: (" + i + ") ",
-              " / TITLE: " + e.snippet.title,
-              " / DESCRIPTION: " + e.snippet.description,
-              " / ID: " + e.id.videoId,
-              " / THUMBNAIL_DEFAULT: " + e.snippet.thumbnails.default.url,
-              " / THUMBNAIL_MEDIUM: " + e.snippet.thumbnails.medium.url,
-              " / THUMBNAIL_HIGH: " + e.snippet.thumbnails.high.url,
-              " / CHANNEL_ID: " + e.snippet.channelId,
-              " / CHANNEL_TITLE: " + e.snippet.channelTitle,
-              " / PUBLISHED AT: " + e.snippet.publishedAt,
+              i,
+              e.snippet.title,
+              e.snippet.description,
+              e.id.videoId,
+              e.snippet.thumbnails.default.url,
+              e.snippet.thumbnails.medium.url,
+              e.snippet.thumbnails.high.url,
+              e.snippet.channelId,
+              e.snippet.channelTitle,
+              e.snippet.publishedAt,
             ];
           })
         );
       });
+    console.log(typeof videos);
+    console.log(videos[0][3]);
   };
 
   const handleVideoSelect = async (sel) => {};
 
   useEffect(() => {
-    handleSubmit(term);
+    // handleSubmit(term);
   }, []);
 
   return (
     <Fragment>
-      <div>
-        <strong> q </strong>: {term}
+      <div className="container-fluid p-0">
+        <div className="row p-0">
+          <div className="col-12  px-0 py-2  bg-dark">
+            <SearchBar
+              passSearch={() => {
+                handleSubmit(term);
+              }}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 bg-secondary">
+            <VideoDetail />
+          </div>
+          <div className="col-2 bg-danger">
+            <VideoList />
+          </div>
+        </div>
       </div>
       <div>
-        <strong> videos </strong>: {videos}
-      </div>{" "}
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 bg-warning">
-            <SearchBar />
-          </div>{" "}
-        </div>{" "}
-        <div className="row">
-          <div className="col-9 bg-secondary">
-            <VideoDetail />
-          </div>{" "}
-          <div className="col-3 bg-danger">
-            <VideoList />
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+        <strong> q: </strong> {term}
+      </div>
+      <div>
+        <strong> Videos: </strong> {videos}
+      </div>
+      <div>
+        <strong>Search:</strong> {term}
+      </div>
     </Fragment>
   );
 };
