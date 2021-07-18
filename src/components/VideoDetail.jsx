@@ -4,7 +4,7 @@ const VideoDetail = () => {
   return (
     <Fragment>
       <div className="row">
-        <div className="col-12 bg-dark text-light p-5">[Screen}</div>
+        <div className="col-12 bg-light p-5">SCREEN</div>
       </div>
       <div className="row">
         <div className="col-12">
