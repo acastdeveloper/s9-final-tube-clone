@@ -3,7 +3,9 @@
 
 # api youtube and keys
 /src/api/youtube.js
-/src/api
+src/api/youtube.js
+youtube.js
+/src/api/
 
 # dependencies
 /trash
