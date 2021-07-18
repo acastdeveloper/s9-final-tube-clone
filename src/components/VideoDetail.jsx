@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 const VideoDetail = () => {
   return (
-    <Fragment className="container-fluid p-5">
+    <Fragment>
       <div className="row">
         <div className="col-12 bg-dark text-light p-5">[Screen}</div>
       </div>
