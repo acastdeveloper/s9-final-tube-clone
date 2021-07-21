@@ -1,18 +1,32 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
+import { GlobalContext } from "./context/GlobalSettings";
+
 import VideoItem from "./VideoItem";
 
 const VideoList = () => {
+  const { videos } = useContext(GlobalContext);
+
   return (
     <Fragment>
-      <h3>Videolist</h3>
-      <div>
-        <VideoItem>Video ITem 1</VideoItem>
-      </div>
-      <div>
-        <VideoItem>Video ITem 2</VideoItem>
-      </div>
-      <div>
-        <VideoItem>Video ITem 3</VideoItem>
+      <div className="p-4 pe-5">
+        {videos.map((e, i) => {
+          return (
+            <VideoItem
+              key={i}
+              n={e[0]}
+              title={e[1].replace(/&quot;/g, '"')}
+              description={e[2].replace(/&quot;/g, '"')}
+              videoId={e[3]}
+              th={e[4]}
+              thM={e[5]}
+              thH={e[6]}
+              chId={e[7]}
+              chTitle={e[8]}
+              publishedAt={e[9]}
+              className="p-4 pe-5"
+            ></VideoItem>
+          );
+        })}
       </div>
     </Fragment>
   );

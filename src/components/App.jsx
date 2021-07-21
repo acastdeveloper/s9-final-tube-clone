@@ -7,8 +7,7 @@ import youtube from "../api/youtube";
 import { GlobalContext } from "./context/GlobalSettings";
 
 const App = () => {
-  const { term, videos, setVideos, videosO, setVideosO } =
-    useContext(GlobalContext);
+  const { term, videos, setVideos, selectedVideo } = useContext(GlobalContext);
 
   const handleSubmit = async (searchTerm) => {
     const response = await youtube
@@ -21,25 +20,23 @@ const App = () => {
         },
       })
       .then((response) => {
-        setVideos(
-          response.data.items.map((e, i) => {
-            return [
-              i,
-              e.snippet.title,
-              e.snippet.description,
-              e.id.videoId,
-              e.snippet.thumbnails.default.url,
-              e.snippet.thumbnails.medium.url,
-              e.snippet.thumbnails.high.url,
-              e.snippet.channelId,
-              e.snippet.channelTitle,
-              e.snippet.publishedAt,
-            ];
-          })
-        );
+        const vMM = response.data.items.map((e, i) => {
+          return [
+            i,
+            e.snippet.title,
+            e.snippet.description,
+            e.id.videoId,
+            e.snippet.thumbnails.default.url,
+            e.snippet.thumbnails.medium.url,
+            e.snippet.thumbnails.high.url,
+            e.snippet.channelId,
+            e.snippet.channelTitle,
+            e.snippet.publishedAt,
+          ];
+        });
+
+        setVideos(vMM);
       });
-    console.log(typeof videos);
-    console.log(videos[0][3]);
   };
 
   const handleVideoSelect = async (sel) => {};
@@ -61,10 +58,13 @@ const App = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 bg-secondary">
+          <div className="col-9 bg-secondary">
+            <div>
+              <strong>Selected: </strong> {selectedVideo}
+            </div>
             <VideoDetail />
           </div>
-          <div className="col-2 bg-danger">
+          <div className="col-3 bg-danger">
             <VideoList />
           </div>
         </div>
