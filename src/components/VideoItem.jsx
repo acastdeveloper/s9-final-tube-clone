@@ -25,6 +25,7 @@ const VideoItem = (props) => {
           <div className="col-6">
             <img
               src={thH}
+              alt={description}
               width="100%"
               className="cursor"
               onClick={() => {
@@ -33,7 +34,14 @@ const VideoItem = (props) => {
             />
           </div>
           <div className="col-6">
-            <h6 className="fw-bold small cursor">{title}</h6>
+            <h6
+              className="fw-bold small cursor"
+              onClick={() => {
+                setSelectedVideo(n);
+              }}
+            >
+              {title}
+            </h6>
             <small className="small">{chTitle}</small> <br />
           </div>
         </div>

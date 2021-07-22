@@ -39,12 +39,6 @@ const App = () => {
       });
   };
 
-  const handleVideoSelect = async (sel) => {};
-
-  useEffect(() => {
-    // handleSubmit(term);
-  }, []);
-
   return (
     <Fragment>
       <div className="container-fluid p-0">
@@ -61,8 +55,8 @@ const App = () => {
           <div className="col-9 bg-secondary">
             <div>
               <strong>Selected: </strong> {selectedVideo}
+              <VideoDetail />
             </div>
-            <VideoDetail />
           </div>
           <div className="col-3 bg-danger">
             <VideoList />
