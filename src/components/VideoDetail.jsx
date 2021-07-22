@@ -13,8 +13,6 @@ const VideoDetail = (props) => {
 
   const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://localhost`;
 
-  console.log(embedUrl);
-
   return (
     <Fragment>
       <div className="row">
@@ -22,12 +20,10 @@ const VideoDetail = (props) => {
           {embedUrl}
 
           <iframe
-            id="player"
+            id="ytplayer"
             type="text/html"
-            width="640"
-            height="360"
             src={embedUrl}
-            frameborder="0"
+            className="col-12"
           ></iframe>
         </div>
       </div>
