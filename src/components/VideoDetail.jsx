@@ -21,8 +21,8 @@ const VideoDetail = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-12 pt-5">
-          <h1>{title}</h1>
+        <div className="col-12 pt-5 mb-2">
+          <div className="fs-3">{title}</div>
           <small>{canalTitle}</small>
         </div>
       </div>
