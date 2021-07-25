@@ -8,7 +8,7 @@ const VideoList = () => {
 
   return (
     <Fragment>
-      <div className="p-4 pe-5">
+      <div>
         {videos.map((e, i) => {
           return (
             <VideoItem

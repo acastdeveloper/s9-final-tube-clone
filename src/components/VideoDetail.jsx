@@ -1,27 +1,34 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
+import { GlobalContext } from "./context/GlobalSettings";
+import YoutubeEmbed from "./YoutubeEmbed";
 
-const VideoDetail = () => {
+const VideoDetail = (props) => {
+  const { videos, selectedVideo } = useContext(GlobalContext);
+
+  const title = selectedVideo !== null && videos[selectedVideo][1];
+  const description = selectedVideo !== null && videos[selectedVideo][2];
+  const videoId = selectedVideo !== null && videos[selectedVideo][3];
+  const canalId = selectedVideo !== null && videos[selectedVideo][7];
+  const canalTitle = selectedVideo !== null && videos[selectedVideo][8];
+
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://localhost`;
+
   return (
     <Fragment>
       <div className="row">
-        <div className="col-12 bg-light p-5">SCREEN</div>
+        <div className="col-12">
+          <YoutubeEmbed embedId={videoId} />
+        </div>
       </div>
       <div className="row">
-        <div className="col-12">
-          <h1>Current Video Title</h1>
+        <div className="col-12 pt-5">
+          <h1>{title}</h1>
+          <small>{canalTitle}</small>
         </div>
       </div>
       <div className="row">
         <div className="col-12">
-          <p>
-            DESCRIPTION Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Laborum ipsam consequuntur rem ut, quis consectetur ab,
-            repudiandae doloribus laudantium expedita accusamus quam fugit
-            eveniet nobis soluta perspiciatis. Sunt eaque neque nihil natus quos
-            adipisci expedita consequatur necessitatibus voluptate aut commodi,
-            nesciunt at error nemo doloremque obcaecati labore delectus aperiam
-            dolores?
-          </p>
+          <p>{description}</p>
         </div>
       </div>
     </Fragment>

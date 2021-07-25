@@ -7,6 +7,8 @@ const GlobalSettings = (props) => {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
+  const [mode, setMode] = useState("default"); // default, list, play
+
   return (
     <GlobalContext.Provider
       value={{
@@ -16,6 +18,8 @@ const GlobalSettings = (props) => {
         setVideos,
         selectedVideo,
         setSelectedVideo,
+        mode,
+        setMode,
       }}
     >
       {props.children}

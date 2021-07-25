@@ -1,7 +1,22 @@
-body {
-  background: #336699;
-}
-
 .cursor {
   cursor: pointer;
+}
+
+#logo {
+  height: 36px;
+  cursor: pointer;
+}
+
+.video-responsive {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
