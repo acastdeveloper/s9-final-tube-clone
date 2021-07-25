@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
-
 import { GlobalContext } from "./context/GlobalSettings";
+import YoutubeEmbed from "./YoutubeEmbed";
 
 const VideoDetail = (props) => {
   const { videos, selectedVideo } = useContext(GlobalContext);
@@ -15,16 +15,17 @@ const VideoDetail = (props) => {
 
   return (
     <Fragment>
+      <br />
+      {embedUrl}
       <div className="row">
         <div className="col-12 bg-light p-5">
-          {embedUrl}
-
-          <iframe
+          <YoutubeEmbed embedId={videoId} />
+          {/* <iframe
             id="ytplayer"
             type="text/html"
             src={embedUrl}
             className="col-12"
-          ></iframe>
+          ></iframe> */}
         </div>
       </div>
       <div className="row">

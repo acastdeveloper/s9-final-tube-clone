@@ -3,7 +3,7 @@ import React, { Fragment, useContext } from "react";
 import { GlobalContext } from "./context/GlobalSettings";
 
 const VideoItem = (props) => {
-  const { setSelectedVideo } = useContext(GlobalContext);
+  const { setSelectedVideo, setMode } = useContext(GlobalContext);
 
   const {
     n,
@@ -30,6 +30,7 @@ const VideoItem = (props) => {
               className="cursor"
               onClick={() => {
                 setSelectedVideo(n);
+                setMode("play");
               }}
             />
           </div>

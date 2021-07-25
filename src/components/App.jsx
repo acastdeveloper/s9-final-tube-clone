@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 
 import { SearchBar, VideoDetail, VideoList } from "./";
 
@@ -7,7 +7,8 @@ import youtube from "../api/youtube";
 import { GlobalContext } from "./context/GlobalSettings";
 
 const App = () => {
-  const { term, videos, setVideos, selectedVideo } = useContext(GlobalContext);
+  const { term, videos, setVideos, selectedVideo, mode, setMode } =
+    useContext(GlobalContext);
 
   const handleSubmit = async (searchTerm) => {
     const response = await youtube
@@ -36,6 +37,7 @@ const App = () => {
         });
 
         setVideos(vMM);
+        setMode("list");
       });
   };
 
@@ -52,15 +54,24 @@ const App = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-9 bg-secondary">
-            <div>
-              <strong>Selected: </strong> {selectedVideo}
-              <VideoDetail />
+          {mode === "play" && (
+            <div className="col-9 bg-warning">
+              <div>
+                <strong>Selected: </strong> {selectedVideo}
+                <VideoDetail />
+              </div>
             </div>
-          </div>
-          <div className="col-3 bg-danger">
-            <VideoList />
-          </div>
+          )}
+
+          {mode !== "default" && (
+            <div
+              className={
+                mode === "play" ? "col-3" : mode === "list" && "col-12"
+              }
+            >
+              <VideoList />
+            </div>
+          )}
         </div>
       </div>
       <div>

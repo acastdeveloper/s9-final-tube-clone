@@ -4,7 +4,7 @@ import { GlobalContext } from "./context/GlobalSettings";
 import VideoItem from "./VideoItem";
 
 const VideoList = () => {
-  const { videos } = useContext(GlobalContext);
+  const { videos, setMode } = useContext(GlobalContext);
 
   return (
     <Fragment>
