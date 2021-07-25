@@ -15,21 +15,13 @@ const VideoDetail = (props) => {
 
   return (
     <Fragment>
-      <br />
-      {embedUrl}
       <div className="row">
-        <div className="col-12 bg-light p-5">
+        <div className="col-12">
           <YoutubeEmbed embedId={videoId} />
-          {/* <iframe
-            id="ytplayer"
-            type="text/html"
-            src={embedUrl}
-            className="col-12"
-          ></iframe> */}
         </div>
       </div>
       <div className="row">
-        <div className="col-12">
+        <div className="col-12 pt-5">
           <h1>{title}</h1>
           <small>{canalTitle}</small>
         </div>

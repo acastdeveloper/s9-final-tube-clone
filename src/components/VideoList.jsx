@@ -4,11 +4,11 @@ import { GlobalContext } from "./context/GlobalSettings";
 import VideoItem from "./VideoItem";
 
 const VideoList = () => {
-  const { videos, setMode } = useContext(GlobalContext);
+  const { videos } = useContext(GlobalContext);
 
   return (
     <Fragment>
-      <div className="p-4 pe-5">
+      <div>
         {videos.map((e, i) => {
           return (
             <VideoItem

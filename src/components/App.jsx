@@ -10,6 +10,78 @@ const App = () => {
   const { term, videos, setVideos, selectedVideo, mode, setMode } =
     useContext(GlobalContext);
 
+  const desHtml = (str) => {
+    return str
+      .replace("&ntilde;", "ñ")
+      .replace("&Ntilde;", "Ñ")
+      .replace("&amp;", "&")
+      .replace("&Ntilde;", "Ñ")
+      .replace("&ntilde;", "ñ")
+      .replace("&Ntilde;", "Ñ")
+      .replace("&Agrave;", "À")
+      .replace("&Aacute;", "Á")
+      .replace("&Acirc;", "Â")
+      .replace("&Atilde;", "Ã")
+      .replace("&Auml;", "Ä")
+      .replace("&Aring;", "Å")
+      .replace("&AElig;", "Æ")
+      .replace("&Ccedil;", "Ç")
+      .replace("&Egrave;", "È")
+      .replace("&Eacute;", "É")
+      .replace("&Ecirc;", "Ê")
+      .replace("&Euml;", "Ë")
+      .replace("&Igrave;", "Ì")
+      .replace("&Iacute;", "Í")
+      .replace("&Icirc;", "Î")
+      .replace("&Iuml;", "Ï")
+      .replace("&ETH;", "Ð")
+      .replace("&Ntilde;", "Ñ")
+      .replace("&Ograve;", "Ò")
+      .replace("&Oacute;", "Ó")
+      .replace("&Ocirc;", "Ô")
+      .replace("&Otilde;", "Õ")
+      .replace("&Ouml;", "Ö")
+      .replace("&Oslash;", "Ø")
+      .replace("&Ugrave;", "Ù")
+      .replace("&Uacute;", "Ú")
+      .replace("&Ucirc;", "Û")
+      .replace("&Uuml;", "Ü")
+      .replace("&Yacute;", "Ý")
+      .replace("&THORN;", "Þ")
+      .replace("&szlig;", "ß")
+      .replace("&agrave;", "à")
+      .replace("&aacute;", "á")
+      .replace("&acirc;", "â")
+      .replace("&atilde;", "ã")
+      .replace("&auml;", "ä")
+      .replace("&aring;", "å")
+      .replace("&aelig;", "æ")
+      .replace("&ccedil;", "ç")
+      .replace("&egrave;", "è")
+      .replace("&eacute;", "é")
+      .replace("&ecirc;", "ê")
+      .replace("&euml;", "ë")
+      .replace("&igrave;", "ì")
+      .replace("&iacute;", "í")
+      .replace("&icirc;", "î")
+      .replace("&iuml;", "ï")
+      .replace("&eth;", "ð")
+      .replace("&ntilde;", "ñ")
+      .replace("&ograve;", "ò")
+      .replace("&oacute;", "ó")
+      .replace("&ocirc;", "ô")
+      .replace("&otilde;", "õ")
+      .replace("&ouml;", "ö")
+      .replace("&oslash;", "ø")
+      .replace("&ugrave;", "ù")
+      .replace("&uacute;", "ú")
+      .replace("&ucirc;", "û")
+      .replace("&uuml;", "ü")
+      .replace("&yacute;", "ý")
+      .replace("&thorn;", "þ")
+      .replace("&yuml;", "ÿ");
+  };
+
   const handleSubmit = async (searchTerm) => {
     const response = await youtube
       .get("search", {
@@ -24,8 +96,8 @@ const App = () => {
         const vMM = response.data.items.map((e, i) => {
           return [
             i,
-            e.snippet.title,
-            e.snippet.description,
+            desHtml(e.snippet.title),
+            desHtml(e.snippet.description),
             e.id.videoId,
             e.snippet.thumbnails.default.url,
             e.snippet.thumbnails.medium.url,
@@ -33,6 +105,7 @@ const App = () => {
             e.snippet.channelId,
             e.snippet.channelTitle,
             e.snippet.publishedAt,
+            e.snippet.tags,
           ];
         });
 
@@ -43,9 +116,9 @@ const App = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid p-0">
-        <div className="row p-0">
-          <div className="col-12  px-0 py-2  bg-dark">
+      <div className="container-fluid">
+        <div className="row ">
+          <div className="col-12 p-2 bg-dark">
             <SearchBar
               passSearch={() => {
                 handleSubmit(term);
@@ -53,35 +126,26 @@ const App = () => {
             />
           </div>
         </div>
-        <div className="row">
+
+        <div className="row p-5 d-flex justify-content-around">
           {mode === "play" && (
-            <div className="col-9 bg-warning">
-              <div>
-                <strong>Selected: </strong> {selectedVideo}
-                <VideoDetail />
-              </div>
+            <div className="col-9">
+              <VideoDetail />
             </div>
           )}
 
           {mode !== "default" && (
             <div
               className={
-                mode === "play" ? "col-3" : mode === "list" && "col-12"
+                mode === "play"
+                  ? "col-3"
+                  : mode === "list" && "col-6 self-align-center px-0"
               }
             >
               <VideoList />
             </div>
           )}
         </div>
-      </div>
-      <div>
-        <strong> q: </strong> {term}
-      </div>
-      <div>
-        <strong> Videos: </strong> {videos}
-      </div>
-      <div>
-        <strong>Search:</strong> {term}
       </div>
     </Fragment>
   );
